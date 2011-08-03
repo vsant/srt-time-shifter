@@ -1,0 +1,5 @@
+Timeshift the subtitles in an SRT file
+
+- Run `srt-time-shifter.py` for usage.
+
+- example.srt has the format for input subtitle files
