@@ -95,7 +95,7 @@ def time_shift(chunks, shift, start=1):
 
       chunk['times'] = "%s --> %s\n" % (t1,t2)
       chunk['num'] = str(chunkCounter)+"\n";
-      chunk_count = chunkCounter + 1
+      chunkCounter = chunkCounter + 1
     newChunks.append(chunk)
   return newChunks
 
