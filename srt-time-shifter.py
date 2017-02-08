@@ -80,13 +80,22 @@ def parse_add_time(time_str, shift):
 # Return a set of chunks with times shifted by 's,ms'
 # [optionally only starting from frame # <start>]
 def time_shift(chunks, shift, start=1):
+  chunkCounter = start
   newChunks = []
   for chunk in chunks:
     if int(chunk['num']) >= start:
       (t1, t2) = chunk['times'].split(' --> ')
-      t1 = parse_add_time(t1, shift)
-      t2 = parse_add_time(t2, shift)
+      try:
+        t1 = parse_add_time(t1, shift)
+        t2 = parse_add_time(t2, shift)
+      except Exception as e:
+        # the new timestamp could be invalid
+        # discarding the chunk
+        continue;
+
       chunk['times'] = "%s --> %s\n" % (t1,t2)
+      chunk['num'] = str(chunkCounter)+"\n";
+      chunk_count = chunkCounter + 1
     newChunks.append(chunk)
   return newChunks
 
