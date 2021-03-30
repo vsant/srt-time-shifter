@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # 
 # Timeshift the subtitles in a .srt file
 # Vivek Sant
@@ -12,12 +12,12 @@ import datetime
 
 # Usage
 def usage(args):
-  print >>sys.stderr, '''If your subtitles appear too soon or too late, use \
+  print('''If your subtitles appear too soon or too late, use \
 this program to timeshift them.\n
 Usage:
     %s subtitles_file.srt seconds [ms]
     %s subtitles_file.srt seconds ms start_title_num
-seconds [and ms] should be integers, and can be either positive or negative''' % (args[0], args[0])
+seconds [and ms] should be integers, and can be either positive or negative''' % (args[0], args[0]), file=sys.stderr)
   return 2
 
 
