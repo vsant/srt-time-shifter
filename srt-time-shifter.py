@@ -17,7 +17,9 @@ this program to timeshift them.\n
 Usage:
     %s subtitles_file.srt seconds [ms]
     %s subtitles_file.srt seconds ms start_title_num
-seconds [and ms] should be integers, and can be either positive or negative''' % (args[0], args[0]), file=sys.stderr)
+    
+seconds [and ms] should be integers, and can be negative,
+[start_title_num] should be a positive integer''' % (args[0], args[0]), file=sys.stderr)
   return 2
 
 
@@ -29,7 +31,8 @@ def import_parse_file(file):
   for line in open(file, 'r'):
     # If we hit blank line, write out chunk, and reinit empty values
     if line.strip() == '':
-      chunks.append(chunk)
+      if chunk:
+        chunks.append(chunk)
       chunk = {}
       i = 0
       continue
@@ -91,10 +94,10 @@ def time_shift(chunks, shift, start=1):
       except Exception as e:
         # the new timestamp could be invalid
         # discarding the chunk
-        continue;
+        continue
 
       chunk['times'] = "%s --> %s\n" % (t1,t2)
-      chunk['num'] = str(chunkCounter)+"\n";
+      chunk['num'] = str(chunkCounter)+"\n"
       chunkCounter = chunkCounter + 1
     newChunks.append(chunk)
   return newChunks
